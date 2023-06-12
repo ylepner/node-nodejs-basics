@@ -1,4 +1,5 @@
-import { stat } from 'fs/promises';
+import { stat, copyFile, constants, readdir, mkdir } from 'fs/promises';
+import { join } from 'path'
 
 async function isExists(dir) {
   try {
@@ -9,17 +10,22 @@ async function isExists(dir) {
   }
 }
 
-
 const copy = async () => {
   const folderPath = './files';
   const newFolderPath = './files_copy';
-
   if (await isExists(newFolderPath)) {
     throw new Error('FS operation failed')
   } else {
-    console.log('Lets copy the folder!')
+    await mkdir(newFolderPath)
+    await copyFiles(folderPath)
   }
-
 };
+
+async function copyFiles(path) {
+  const files = await readdir(path);
+  for (const file of files) {
+    await copyFile(join('.', 'files', file), join('.', 'files_copy', file), constants.COPYFILE_EXCL);
+  }
+}
 
 await copy();
