@@ -1,7 +1,7 @@
 import { promisify } from 'util';
 import { pipeline } from 'stream';
 import { createGzip } from 'zlib';
-import { createReadStream, createWriteStream } from 'node:fs';
+import { createReadStream, createWriteStream } from 'fs';
 
 const source = './files/fileToCompress.txt';
 const destination = './files/archive.gz';
