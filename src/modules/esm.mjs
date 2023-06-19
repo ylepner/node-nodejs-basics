@@ -4,13 +4,14 @@ import { release, version } from 'os';
 import { createServer as createServerHttp } from 'http';
 import { readFile } from 'fs/promises';
 import "./files/c.js";
+import { join } from 'path'
 
 const random = Math.random();
 
 let unknownObject;
 
-const fileA = JSON.parse(await readFile(new URL('./files/a.json', import.meta.url)))
-const fileB = JSON.parse(await readFile(new URL('./files/b.json', import.meta.url))
+const fileA = JSON.parse(await readFile(new URL(join('.', 'files', 'a.json'), import.meta.url)))
+const fileB = JSON.parse(await readFile(new URL(join('.', 'files', 'b.json'), import.meta.url))
 );
 
 if (random > 0.5) {

@@ -1,7 +1,12 @@
 import { unlink } from 'fs/promises';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const filePath = fileURLToPath(import.meta.url);
+const dirPath = dirname(filePath);
 
 const remove = async () => {
-  const file = './files/fileToRemove.txt';
+  const file = join(dirPath, 'files', 'fileToRemove.txt');
   try {
     await unlink(file)
   } catch {
